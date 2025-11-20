@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fake Image Detector</title>
+  <meta name="description" content="Upload an image and detect whether it is real or fake using your model." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar" role="banner">
+      <div class="brand">
+        <!-- simple logo -->
+        <svg class="logo" width="36" height="36" viewBox="0 0 24 24" aria-hidden="true">
+          <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#4F46E5"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs>
+          <rect width="24" height="24" rx="6" fill="url(#g)"></rect>
+          <path d="M7 12l3 3 7-9" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <div>
+          <h1 class="site-title">Fake Image Detector</h1>
+          <p class="site-sub">Fast, private inference — your model, your data</p>
+        </div>
+      </div>
+      <!-- removed navigation link -->
+      <nav class="nav" aria-label="Main"></nav>
+    </header>
+
+    <main class="container" role="main">
+      <section class="upload-panel" aria-labelledby="uploadTitle">
+        <div class="panel-left">
+          <h2 id="uploadTitle">Upload an image</h2>
+          <p class="muted">PNG/JPEG up to 8 MB. Images are processed locally on the server hosting your model.</p>
+
+          <form id="uploadForm" class="upload-form" aria-describedby="uploadDesc" novalidate>
+            <label for="fileInput" class="dropzone" id="dropZone" tabindex="0" aria-label="File drop zone. Click or press Enter to select a file.">
+              <input id="fileInput" name="image" type="file" accept="image/*" class="sr-only" />
+              <div class="dz-content">
+                <svg width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                  <path d="M7 10l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                </svg>
+                <div>
+                  <strong>Drag & drop</strong> or <span class="linkish">browse</span>
+                  <div class="muted small">Supported formats: JPG, PNG — up to 8 MB</div>
+                </div>
+              </div>
+            </label>
+
+            <div class="preview-wrap hidden" id="previewWrap" aria-live="polite">
+              <div class="preview-frame">
+                <img id="previewImage" alt="Image preview" />
+              </div>
+              <div class="preview-meta">
+                <div id="fileName" class="meta-name"></div>
+                <div id="fileSize" class="meta-size muted small"></div>
+              </div>
+              <div class="preview-actions">
+                <button type="button" id="clearBtn" class="btn ghost">Remove</button>
+                <button type="button" id="analyzeBtn" class="btn primary" disabled>Analyze image</button>
+              </div>
+            </div>
+
+            <div class="note muted small" id="uploadDesc">Your image is sent only to the server running your model. Ensure the model server is correctly configured.</div>
+          </form>
+        </div>
+
+        <aside class="panel-right" aria-labelledby="resultTitle">
+          <h3 id="resultTitle">Result</h3>
+
+          <div class="result-card" id="resultCard" aria-live="polite">
+            <div class="result-empty" id="resultEmpty">
+              <div class="muted">No analysis yet — upload an image to get started.</div>
+            </div>
+
+            <div class="result-loading hidden" id="resultLoading">
+              <div class="loader" role="status" aria-hidden="true"></div>
+              <div class="muted">Analyzing image — this typically takes a few seconds.</div>
+              <div class="progress" aria-hidden="true"><div class="progress-bar" id="progBar" style="width:0%"></div></div>
+            </div>
+
+            <div class="result-final hidden" id="resultFinal">
+              <div class="row space-between">
+                <div>
+                  <div id="labelText" class="label-text">LABEL</div>
+                  <div id="confidenceText" class="muted small">Confidence</div>
+                </div>
+                <div id="badge" class="badge">—</div>
+              </div>
+
+              <div class="separator"></div>
+
+              <div class="result-details">
+                <pre id="rawJson" class="raw-json" aria-hidden="false"></pre>
+              </div>
+
+              <div class="actions">
+                <button id="downloadBtn" class="btn ghost">Download report</button>
+                <button id="reAnalyzeBtn" class="btn">Analyze another</button>
+              </div>
+            </div>
+
+            <div class="result-error hidden" id="resultError" role="alert">
+              <strong>Analysis failed</strong>
+              <div id="errorMsg" class="muted small"></div>
+              <div class="actions">
+                <button id="retryBtn" class="btn">Try again</button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Notes section removed as requested -->
+
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div class="muted small">Local dev: server runs on <code>http://localhost:8080</code>. Secure with HTTPS for production.</div>
+    </footer>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
