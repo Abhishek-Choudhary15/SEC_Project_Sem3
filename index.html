@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deepfake Image Detector</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo">⚡</div>
+      <span class="brand">Deepfake Detector</span>
+    </div>
+    <div class="nav-links">
+      <a href="#home" class="active">Home</a>
+      <a href="#detect">Detector</a>
+      <a href="#about">About</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="hero">
+    <div class="hero-left">
+      <h1>Detect Deepfake Images in Seconds</h1>
+      <p>
+        Upload an image and let our AI model analyze it for possible manipulation.
+        Get a simple, clear result: <strong>Real</strong> or <strong>Deepfake</strong>.
+      </p>
+      <a href="#detect" class="primary-btn">Try Detector</a>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <h3>How it works</h3>
+        <ul>
+          <li>1️⃣ Upload an image (JPG/PNG)</li>
+          <li>2️⃣ Our model scans for manipulation</li>
+          <li>3️⃣ You get a deepfake probability score</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETECTOR SECTION -->
+  <section id="detect" class="detect-section">
+    <h2>Deepfake Image Detector</h2>
+    <p class="section-subtitle">Upload an image to check if it is likely a deepfake.</p>
+
+    <div class="detector-container">
+
+      <!-- UPLOAD AREA -->
+      <div class="upload-area" id="upload-area">
+        <input type="file" id="image-input" accept="image/*" hidden />
+        <div class="upload-content">
+          <p class="upload-title">Drag &amp; Drop an Image Here</p>
+          <p class="upload-subtitle">or</p>
+          <button id="browse-btn" class="secondary-btn">Browse File</button>
+          <p class="upload-hint">Supported formats: JPG, JPEG, PNG</p>
+        </div>
+      </div>
+
+      <!-- PREVIEW & RESULT -->
+      <div class="preview-result-container">
+        <div class="preview-card">
+          <h3>Image Preview</h3>
+          <div class="preview-box" id="preview-box">
+            <span class="preview-placeholder">No image selected</span>
+            <img id="preview-img" src="" alt="preview" />
+          </div>
+        </div>
+
+        <div class="result-card">
+          <h3>Detection Result</h3>
+          <button id="analyze-btn" class="primary-btn" disabled>Analyze Image</button>
+
+          <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Analyzing image...</p>
+          </div>
+
+          <div id="result" class="result hidden">
+            <p class="result-label">Prediction:</p>
+            <p id="result-text" class="result-text"></p>
+            <p class="result-score">Confidence: <span id="result-score"></span></p>
+          </div>
+
+          <div id="error-box" class="error-box hidden"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="about-section">
+    <h2>About This Project</h2>
+    <p>
+      This is a demo frontend for a Deepfake Image Detector. The actual prediction is done
+      by a separate backend AI model (for example, built with Python, TensorFlow, or PyTorch).
+    </p>
+    <p>
+      To use this in production, connect the frontend to your backend API endpoint in
+      <code>script.js</code>. The backend should accept an image file and return JSON like:
+    </p>
+    <pre>
+{
+  "label": "deepfake",        // or "real"
+  "confidence": 0.91
+}
+    </pre>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Deepfake Detector • Built for learning & research</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
