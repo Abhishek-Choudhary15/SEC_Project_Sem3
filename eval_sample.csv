@@ -1,6 +1,0 @@
-path,true_is_fake,prob_fake,pred_label
-.\dataset\val\Fake\fake_0.jpg,1,0.648883,fake
-.\dataset\val\Fake\fake_1.jpg,1,0.312211,real
-.\dataset\val\Fake\fake_10.jpg,1,0.100000,real
-.\dataset\val\Fake\fake_100.jpg,1,0.050936,real
-.\dataset\val\Fake\fake_1000.jpg,1,0.256060,real
